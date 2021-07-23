@@ -1,0 +1,26 @@
+.navbar_body {
+  width: 100%;
+}
+
+.list_father {
+  margin: none;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.list_father li a {
+  text-decoration: none;
+  color: var(--interactable-color);
+  padding: 5px;
+  cursor: pointer;
+  border-bottom: 0px;
+  transition: all 0.3s;
+}
+
+.list_father li a:hover {
+  border-bottom: 2px solid var(--important-content-color);
+  margin-bottom: 5px;
+  padding: 15px;
+}
