@@ -27,3 +27,7 @@ body {
 .text {
   color: var(--main-text-color);
 }
+
+.border {
+  border: 1px solid violet;
+}

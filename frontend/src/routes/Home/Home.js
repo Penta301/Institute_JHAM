@@ -44,34 +44,35 @@ function Home() {
             alt="school"
           />
         </article>
+      </section>
+      <section className="third_section">
         <div className="form">
           <Form></Form>
         </div>
+        <footer className="item shadow footer">
+          <article>
+            <p className="text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit,
+              at? Mollitia dolor aliquam totam nulla ea distinctio autem non
+              dolores reiciendis sit quos et tempora aspernatur laudantium, ab
+              tempore commodi.
+            </p>
+          </article>
+          <div>
+            <ul className="footer_info">
+              <li>
+                <a href="#test">Desarrollador</a>
+              </li>
+              <li>
+                <a href="#test">Ubicacion</a>
+              </li>
+              <li>
+                <a href="#test">2657-638252</a>
+              </li>
+            </ul>
+          </div>
+        </footer>
       </section>
-      <footer className="item shadow footer">
-        <article>
-          <p className="text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit,
-            at? Mollitia dolor aliquam totam nulla ea distinctio autem non
-            dolores reiciendis sit quos et tempora aspernatur laudantium, ab
-            tempore commodi.
-          </p>
-        </article>
-        <div>
-          <ul className="footer_info">
-            <img src="" alt="logo" />
-            <li>
-              <a href="#test">Desarrollador</a>
-            </li>
-            <li>
-              <a href="#test">Ubicacion</a>
-            </li>
-            <li>
-              <a href="#test">2657-638252</a>
-            </li>
-          </ul>
-        </div>
-      </footer>
     </>
   );
 }
