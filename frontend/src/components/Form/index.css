@@ -1,6 +1,7 @@
 .button_body {
   border-radius: 20px;
   background-color: var(--interactable-color);
+  padding: 0;
 }
 
 .button_body:hover {
@@ -18,6 +19,8 @@
   border: none;
   text-decoration: none;
   cursor: pointer;
+  width: 100%;
+  height: 100%;
 }
 
 .button_form_send {

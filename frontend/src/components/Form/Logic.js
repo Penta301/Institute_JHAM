@@ -6,7 +6,7 @@ function Logic() {
   let [springForm, setSpringForm] = useSpring(() => {
     return {
       height: "30%",
-      width: "30%",
+      width: "25%",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
@@ -14,35 +14,35 @@ function Logic() {
     };
   });
 
-  const springHandle = (true_false) => {
-    if (true_false) {
-      console.log("if accomplished");
+  const springHandle = (event) => {
+    if (event) {
       setSpringForm(() => {
         return {
-          height: "100%",
-          width: "100%",
-          padding: "10px",
+          height: "30%",
+          width: "25%",
           display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "flex-start",
-          cursor: "auto",
+          justifyContent: "center",
+          alignItems: "center",
+          cursor: "pointer",
         };
       });
-      setShowForm(false);
+      setShowForm(true);
       return;
     }
-    console.log("executed");
+
     setSpringForm(() => {
       return {
-        height: "30%",
-        width: "30%",
+        height: "100%",
+        width: "100%",
+        padding: "10px",
         display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        cursor: "pointer",
+        justifyContent: "flex-start",
+        alignItems: "flex-start",
+        cursor: "auto",
       };
     });
     setShowForm(false);
+    return;
   };
 
   return {

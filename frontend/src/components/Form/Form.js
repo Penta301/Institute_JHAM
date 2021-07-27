@@ -11,11 +11,13 @@ function Form() {
     <>
       <animated.div
         className="button_body shadow item"
+        id="expand_div"
         style={springForm}
-        onClick={() => springHandle(true)}
       >
         {showForm ? (
-          <button className="button_form">Conviertete en estudiante</button>
+          <button className="button_form" onClick={() => springHandle()}>
+            Conviertete en estudiante
+          </button>
         ) : (
           <div className="content_container_form">
             <div className="inside_content_form">
@@ -51,15 +53,16 @@ function Form() {
               className="textarea_form text shadow"
               placeholder="Que estas interesado en aprender?"
             ></textarea>
-            <button className="button_form_cancel shadow text">Cancel</button>
             <button
-              className="button_form_send shadow text"
+              className="button_form_cancel shadow text"
+              id="cancel_button"
               onClick={() => {
-                springHandle(false);
+                springHandle(true);
               }}
             >
-              Send
+              Cancel
             </button>
+            <button className="button_form_send shadow text">Send</button>
           </div>
         )}
       </animated.div>
