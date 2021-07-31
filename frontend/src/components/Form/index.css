@@ -2,6 +2,7 @@
   border-radius: 20px;
   background-color: var(--interactable-color);
   padding: 0;
+  transition: box-shadow 0.5s;
 }
 
 .button_body:hover {

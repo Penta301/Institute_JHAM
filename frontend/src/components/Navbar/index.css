@@ -10,7 +10,7 @@
   width: 90%;
 }
 
-.list_father li a {
+.link_navbar {
   text-decoration: none;
   color: var(--interactable-color);
   padding: 5px;
@@ -19,7 +19,7 @@
   transition: all 0.3s;
 }
 
-.list_father li a:hover {
+.link_navbar:hover {
   border-bottom: 2px solid var(--important-content-color);
   margin-bottom: 5px;
   padding: 15px;

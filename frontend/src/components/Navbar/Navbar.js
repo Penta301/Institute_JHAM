@@ -1,23 +1,31 @@
 import React from "react";
 import "./index.css";
+import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ auth }) {
   return (
     <>
       <nav className="navbar_body">
         <ul className="list_father">
-          <li>
+          <li className="link_navbar">
             <a href="#test">Logo</a>
           </li>
-          <li>
+          <li className="link_navbar">
             <a href="#test">Cursos</a>
           </li>
-          <li>
+          <li className="link_navbar">
             <a href="#test">Materias</a>
           </li>
-          <li>
+          <li className="link_navbar">
             <a href="#test">Ingresos</a>
           </li>
+          {auth ? (
+            <Link className="link_navbar">Logout</Link>
+          ) : (
+            <Link className="link_navbar" to="/login">
+              Login
+            </Link>
+          )}
         </ul>
       </nav>
     </>

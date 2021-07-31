@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSpring } from "react-spring";
 
 function Logic() {
+  const [verificationPass, setVerificationPass] = useState("");
   const [showForm, setShowForm] = useState(true);
   let [springForm, setSpringForm] = useSpring(() => {
     return {
@@ -45,10 +46,20 @@ function Logic() {
     return;
   };
 
+  const verificaPass = (password) => {
+    if (password === verificationPass) {
+      return true;
+    }
+    alert("The password are different, insert the same");
+  };
+
   return {
     springHandle,
     springForm,
     showForm,
+    setVerificationPass,
+    verificationPass,
+    verificaPass,
   };
 }
 

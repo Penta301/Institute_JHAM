@@ -3,7 +3,14 @@ import "./index.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Form from "../../components/Form/Form";
 
-function Home() {
+function Home({
+  auth,
+  setAuth,
+  bodyUser,
+  setBodyUser,
+  startSession,
+  createSesion,
+}) {
   return (
     <>
       <main className="main_content">
@@ -47,7 +54,18 @@ function Home() {
       </section>
       <section className="third_section">
         <div className="form">
-          <Form></Form>
+          {auth ? (
+            ""
+          ) : (
+            <Form
+              auth={auth}
+              setAuth={setAuth}
+              bodyUser={bodyUser}
+              setBodyUser={setBodyUser}
+              startSession={startSession}
+              createSesion={createSesion}
+            ></Form>
+          )}
         </div>
         <footer className="item shadow footer">
           <article>
