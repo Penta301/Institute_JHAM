@@ -1,39 +1,43 @@
 import "./App.css";
 import Home from "./routes/Home/Home";
-import ProtectedRouter from "./helpers/ProtectedRouter/ProtectedRouter";
 import Logic from "./Logic";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Form from "./components/Form/Form";
+import LogicHigherOrderForm from "./components/HigherOrderForm/LogicHigherOrderForm";
 
 function App() {
-  const { auth, setAuth, bodyUser, setBodyUser, startSession, createSesion } =
-    Logic();
+  const {
+    auth,
+    setAuth,
+    bodyUser,
+    setBodyUser,
+    startSession,
+    createSesion,
+    closeSession,
+    startSessionBody,
+    setStartSessionBody,
+  } = Logic();
 
   return (
     <Router>
-      <div>
-        <Home
-          bodyUser={bodyUser}
-          auth={auth}
-          setAuth={setAuth}
-          setBodyUser={setBodyUser}
-          startSession={startSession}
-          createSesion={createSesion}
-        ></Home>
-      </div>
-      <ProtectedRouter
-        path="/login"
-        auth={auth}
-        Component={Form}
-        PropsComponent={{
-          startSession: startSession,
-          bodyUser: bodyUser,
-          setBodyUser: setBodyUser,
-          auth: auth,
-          createSesion: createSesion,
-          login: true,
-        }}
-      />
+      <Route exact path="/">
+        <div>
+          <Home
+            bodyUser={bodyUser}
+            auth={auth}
+            setAuth={setAuth}
+            setBodyUser={setBodyUser}
+            createSesion={createSesion}
+            closeSession={closeSession}
+          ></Home>
+        </div>
+      </Route>
+      <Route path="/login">
+        <LogicHigherOrderForm
+          autoInputs={startSessionBody}
+          setter={setStartSessionBody}
+          actionCB={() => startSession(startSessionBody)}
+        />
+      </Route>
     </Router>
   );
 }

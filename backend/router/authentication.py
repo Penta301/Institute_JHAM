@@ -18,15 +18,15 @@ def get_config():
 
 @router.post('/')
 async def authenticate(user:Token, Authorize: AuthJWT = Depends()):
-    response = await authenticate_operation(collection_user, user.name)
+    response = await authenticate_operation(collection_user, user.email)
     if not response:
-        raise HTTPException(404, f"That user with the email: {user.name}, doesn't exist")
+        raise HTTPException(404, f"That user with the email: {user.email}, doesn't exist")
     
     verify_pass = Hash.verify(user.password, response["password"])   
     
     if not verify_pass: 
         raise HTTPException(404, f"Invalid Credentials")
 
-    access_token = Authorize.create_access_token(subject=user.name)
+    access_token = Authorize.create_access_token(subject=user.email)
 
     return {"jwt": access_token}

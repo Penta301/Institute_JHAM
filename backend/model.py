@@ -1,14 +1,14 @@
 from pydantic import BaseModel
 
 class Token(BaseModel):
-    name:str
+    email:str
     password:str
 
 class User(BaseModel):
     password:str
     email:str
     name:str
-    age:int
+    age:str
     interest:str
 
 class Show_User(BaseModel):

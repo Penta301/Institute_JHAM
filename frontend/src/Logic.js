@@ -10,6 +10,10 @@ function Logic() {
     interest: "",
     email: "",
   });
+  const [startSessionBody, setStartSessionBody] = useState({
+    email: "",
+    password: "",
+  });
 
   axios.defaults.headers.common[
     "Authorization"
@@ -33,8 +37,8 @@ function Logic() {
 
   const createSesion = async (body) => {
     try {
-      const { data } = api.post("/create_user/", body);
-      let startSessionBody = { password: body.password, name: body.name };
+      api.post("/create_user/", body);
+      let startSessionBody = { password: body.password, email: body.email };
       startSession(startSessionBody);
     } catch (error) {
       throw new Error(error);
@@ -57,7 +61,17 @@ function Logic() {
     verifySession();
   };
 
-  return { auth, setAuth, bodyUser, setBodyUser, startSession, createSesion };
+  return {
+    auth,
+    setAuth,
+    bodyUser,
+    setBodyUser,
+    startSession,
+    createSesion,
+    closeSession,
+    startSessionBody,
+    setStartSessionBody,
+  };
 }
 
 export default Logic;

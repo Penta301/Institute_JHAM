@@ -10,12 +10,13 @@ function Home({
   setBodyUser,
   startSession,
   createSesion,
+  closeSession,
 }) {
   return (
     <>
       <main className="main_content">
         <header>
-          <Navbar></Navbar>
+          <Navbar closeSession={closeSession} auth={auth}></Navbar>
         </header>
         <div className="title_container">
           <h1 className="title_header">Instituto JHAM</h1>

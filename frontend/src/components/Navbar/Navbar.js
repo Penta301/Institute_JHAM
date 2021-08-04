@@ -2,7 +2,7 @@ import React from "react";
 import "./index.css";
 import { Link } from "react-router-dom";
 
-function Navbar({ auth }) {
+function Navbar({ auth, closeSession }) {
   return (
     <>
       <nav className="navbar_body">
@@ -20,7 +20,9 @@ function Navbar({ auth }) {
             <a href="#test">Ingresos</a>
           </li>
           {auth ? (
-            <Link className="link_navbar">Logout</Link>
+            <Link className="link_navbar" onClick={() => closeSession()}>
+              Logout
+            </Link>
           ) : (
             <Link className="link_navbar" to="/login">
               Login

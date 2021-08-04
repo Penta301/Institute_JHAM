@@ -46,6 +46,6 @@ async def remove_operation(collection, name):
    result = await collection.delete_one({"name":name})
    return result.deleted_count
 
-async def authenticate_operation(collection, name):
-    verification_name = await collection.find_one({"name":name,})
+async def authenticate_operation(collection, email):
+    verification_name = await collection.find_one({"email":email,})
     return verification_name

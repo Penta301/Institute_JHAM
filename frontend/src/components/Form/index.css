@@ -41,20 +41,6 @@
   border-radius: 10px;
   width: 100px;
   height: 40px;
-  align-self: flex-end;
-}
-
-.content_container_form {
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-}
-
-.inside_content_form {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: space-between;
 }
 
 .text_input_form {
@@ -87,4 +73,18 @@
   padding-top: 10px;
   border-radius: 10px;
   resize: none;
+}
+
+.form_body_container {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.button_container {
+  display: flex;
+  height: 80%;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 20px;
 }

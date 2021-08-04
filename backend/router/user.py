@@ -14,7 +14,7 @@ router = APIRouter(
 )
 
 @router.post("/create_user/", response_model = Show_User)
-async def post_todo(user: User):
+async def create_user(user: User):
     user = user.dict()
     user["password"] = Hash.encrypt(user["password"])
     print(user)

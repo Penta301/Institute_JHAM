@@ -15,7 +15,7 @@ router = APIRouter(
 )
 
 @router.post("/create_course/", response_model = Course)
-async def post_todo(course: Course, user:AuthJWT = Depends()):
+async def create_course(course: Course, user:AuthJWT = Depends()):
     user.jwt_required()
     course = course.dict()
 
@@ -26,6 +26,6 @@ async def post_todo(course: Course, user:AuthJWT = Depends()):
 
 
 @router.get('/get_courses/{where}/{type_course}') 
-async def get_food(type_course:str,where:str):
+async def get_course(type_course:str,where:str):
     response = await fetch_all(collection_course, Course, where, type_course)
     return response
