@@ -3,6 +3,7 @@ import Home from "./routes/Home/Home";
 import Logic from "./Logic";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import LogicHigherOrderForm from "./components/HigherOrderForm/LogicHigherOrderForm";
+import "./FormLogin.css";
 
 function App() {
   const {
@@ -32,11 +33,13 @@ function App() {
         </div>
       </Route>
       <Route path="/login">
-        <LogicHigherOrderForm
-          autoInputs={startSessionBody}
-          setter={setStartSessionBody}
-          actionCB={() => startSession(startSessionBody)}
-        />
+        <div className="body_login">
+          <LogicHigherOrderForm
+            autoInputs={startSessionBody}
+            setter={setStartSessionBody}
+            actionCB={() => startSession(startSessionBody)}
+          />
+        </div>
       </Route>
     </Router>
   );

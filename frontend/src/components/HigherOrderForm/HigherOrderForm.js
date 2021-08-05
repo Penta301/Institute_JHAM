@@ -11,15 +11,8 @@ function HigherOrderForm({
   const history = useHistory();
 
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-      }}
-    >
-      <div className="form_body_container">
-        {iterateInputs(autoInputs, setter)}
-      </div>
+    <div>
+      <div>{iterateInputs(autoInputs, setter)}</div>
       {manualInputs}
       <div className="button_container">
         {cancelCB ? (

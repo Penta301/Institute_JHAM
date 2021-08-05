@@ -1,0 +1,26 @@
+.footer_body_father {
+  display: flex;
+  justify-content: space-between;
+  border: 3px solid var(--secondary-content-color);
+  border-radius: 20px;
+  margin: 0;
+  padding: 5px;
+}
+
+.container_footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item_footer {
+  color: var(--interactable-color);
+  padding: 20px;
+  height: 85%;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  border-radius: 20px;
+  display: flex;
+  gap: 20px;
+}

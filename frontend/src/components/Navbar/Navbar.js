@@ -8,9 +8,6 @@ function Navbar({ auth, closeSession }) {
       <nav className="navbar_body">
         <ul className="list_father">
           <li className="link_navbar">
-            <a href="#test">Logo</a>
-          </li>
-          <li className="link_navbar">
             <a href="#test">Cursos</a>
           </li>
           <li className="link_navbar">

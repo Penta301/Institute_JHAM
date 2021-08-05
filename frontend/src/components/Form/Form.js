@@ -20,12 +20,14 @@ function Form({ bodyUser, setBodyUser, createSesion }) {
             Conviertete en estudiante
           </button>
         ) : (
-          <LogicHigherOrderForm
-            autoInputs={bodyUser}
-            setter={setBodyUser}
-            actionCB={() => createSesion(bodyUser)}
-            cancelCB={() => springHandle(true)}
-          />
+          <div className="body_form_father">
+            <LogicHigherOrderForm
+              autoInputs={bodyUser}
+              setter={setBodyUser}
+              actionCB={() => createSesion(bodyUser)}
+              cancelCB={() => springHandle(true)}
+            />
+          </div>
         )}
       </animated.div>
     </>
