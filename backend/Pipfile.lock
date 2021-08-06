@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "891710c6e0b8f1c3ff71f129f3e34f38420229b0096648c3fd22f3f48738e4a6"
+            "sha256": "ad8c935ea870e7d77d58bee04efbd6a13e63b79d297bab4ec7e01cd0c8c778ac"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -126,11 +126,11 @@
         },
         "fastapi": {
             "hashes": [
-                "sha256:24f45d65e589db3bab162c02a1e2e8b798c098861b1fa3e266efeb71b4faa8e2",
-                "sha256:b05f5af77af3b21cab896b8dade8b383b2d2f254caae4681a56313e29196f1ac"
+                "sha256:c9256a89b0436223b45f53fe3a39b178f3da6be5841a2c59deedff4b676d003f",
+                "sha256:f4dba2596b1e0a1f962834c3b9ec4291a7aec387a1031c6c2e25bf239d27fd0f"
             ],
             "index": "pypi",
-            "version": "==0.67.0"
+            "version": "==0.68.0"
         },
         "fastapi-jwt-auth": {
             "hashes": [

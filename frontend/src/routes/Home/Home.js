@@ -70,7 +70,7 @@ function Home({
           )}
         </div>
       </section>
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </>
   );
 }
