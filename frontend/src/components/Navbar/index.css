@@ -1,19 +1,24 @@
 .navbar_body {
-  width: 100%;
+  margin-top: 10px;
+  border-bottom: 2px solid #ddd;
+}
+
+.title_header {
+  text-transform: uppercase;
+  font-size: 20px;
+  text-decoration: underline;
 }
 
 .list_father {
   margin: none;
   list-style: none;
   display: flex;
-  justify-content: space-between;
-  width: 99%;
-  padding: 0;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .link_navbar {
-  text-decoration: none;
-  color: var(--interactable-color);
+  list-style: none;
   padding: 5px;
   cursor: pointer;
   border-bottom: 0px;
@@ -24,4 +29,26 @@
   border-bottom: 2px solid var(--important-content-color);
   margin-bottom: 5px;
   padding: 15px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--interactable-color);
+}
+
+@media screen and (max-width: 1100px) {
+  .navbar_body {
+    margin-top: 10px;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 10px;
+  }
+
+  .title_header {
+    text-align: center;
+    font-size: 15px;
+  }
+
+  a {
+    font-size: 12px;
+  }
 }

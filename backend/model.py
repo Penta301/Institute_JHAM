@@ -18,10 +18,11 @@ class Show_User(BaseModel):
 class Course(BaseModel):
     type_course:str
     title:str
-    content:str
+    contentSchool:str
+    contentUniversity:str
     owner:str
     img:str
-    img_owner:str
+    category:str
 
 class Settings(BaseModel):
    authjwt_secret_key: str = '7b82e1d300da121b2470deb960b1b802022607de6bf71816123c0d7742fa5f48'

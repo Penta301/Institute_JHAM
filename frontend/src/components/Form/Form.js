@@ -1,35 +1,26 @@
 import React from "react";
 import "./index.css";
-import "animate.css";
 import Logic from "./Logic";
-import { animated } from "react-spring";
 import LogicHigherOrderForm from "../HigherOrderForm/LogicHigherOrderForm";
 
 function Form({ bodyUser, setBodyUser, createSesion }) {
-  const { springHandle, springForm, showForm } = Logic();
+  const { showForm } = Logic();
 
   return (
     <>
-      <animated.div
-        className="button_body shadow item"
-        id="expand_div"
-        style={springForm}
-      >
+      <div className="button_body shadow item" id="expand_div">
         {showForm ? (
-          <button className="button_form" onClick={() => springHandle()}>
-            Conviertete en estudiante
-          </button>
+          <button className="button_form">Conviertete en estudiante</button>
         ) : (
           <div className="body_form_father">
             <LogicHigherOrderForm
               autoInputs={bodyUser}
               setter={setBodyUser}
               actionCB={() => createSesion(bodyUser)}
-              cancelCB={() => springHandle(true)}
             />
           </div>
         )}
-      </animated.div>
+      </div>
     </>
   );
 }

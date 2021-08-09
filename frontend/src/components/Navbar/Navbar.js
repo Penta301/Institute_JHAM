@@ -1,32 +1,42 @@
 import React from "react";
 import "./index.css";
 import { Link } from "react-router-dom";
+import Logic from "./Logic";
+import { motion } from "framer-motion";
 
 function Navbar({ auth, closeSession }) {
+  const { container, item, itemTitle } = Logic();
+
   return (
     <>
-      <nav className="navbar_body">
+      <motion.nav
+        className="navbar_body"
+        variants={container}
+        initial="hidden"
+        animate="visible"
+      >
         <ul className="list_father">
-          <li className="link_navbar">
-            <a href="#test">Cursos</a>
-          </li>
-          <li className="link_navbar">
+          <motion.li className="link_navbar" variants={item}>
+            <Link to="/content">Cursos</Link>
+          </motion.li>
+          <motion.li className="link_navbar" variants={item}>
             <a href="#test">Materias</a>
-          </li>
-          <li className="link_navbar">
+          </motion.li>
+          <motion.li className="link_navbar" variants={itemTitle}>
+            <h1 className="title_header">Instituto JHAM</h1>
+          </motion.li>
+          <motion.li className="link_navbar" variants={item}>
             <a href="#test">Ingresos</a>
-          </li>
-          {auth ? (
-            <Link className="link_navbar" onClick={() => closeSession()}>
-              Logout
-            </Link>
-          ) : (
-            <Link className="link_navbar" to="/login">
-              Login
-            </Link>
-          )}
+          </motion.li>
+          <motion.li className="link_navbar" variants={item}>
+            {auth ? (
+              <Link onClick={() => closeSession()}>Logout</Link>
+            ) : (
+              <Link to="/login">Login</Link>
+            )}
+          </motion.li>
         </ul>
-      </nav>
+      </motion.nav>
     </>
   );
 }

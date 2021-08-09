@@ -22,6 +22,7 @@ function LogicHigherOrderForm({
       return construcction;
     });
   };
+
   return (
     <HigherOrderForm
       iterateInputs={iterateInputs}

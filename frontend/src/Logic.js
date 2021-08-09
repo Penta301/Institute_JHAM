@@ -14,6 +14,7 @@ function Logic() {
     email: "",
     password: "",
   });
+  const [coursesData, setCoursesData] = useState([]);
 
   axios.defaults.headers.common[
     "Authorization"
@@ -41,7 +42,8 @@ function Logic() {
       let startSessionBody = { password: body.password, email: body.email };
       startSession(startSessionBody);
     } catch (error) {
-      throw new Error(error);
+      new Error(error);
+      throw Error;
     }
   };
 
@@ -52,13 +54,24 @@ function Logic() {
       console.log(data);
       setAuth(true);
     } catch (error) {
-      throw new Error(error);
+      new Error(error);
+      throw Error;
     }
   };
 
   const closeSession = () => {
     localStorage.removeItem("token");
     verifySession();
+  };
+
+  const getAllCourses = async (typeCourse) => {
+    try {
+      const { data } = await api.get(`get_all_courses/${typeCourse}`);
+      setCoursesData(data);
+    } catch (error) {
+      new Error(error);
+      throw Error;
+    }
   };
 
   return {
@@ -71,6 +84,8 @@ function Logic() {
     closeSession,
     startSessionBody,
     setStartSessionBody,
+    getAllCourses,
+    coursesData,
   };
 }
 

@@ -1,20 +1,25 @@
 import React from "react";
 import "./index.css";
+import { motion } from "framer-motion";
 
-function ContentShower({ img, description, title }) {
+function Content({ img, description, title, setter, id }) {
   return (
     <>
-      <article className="card-info-content shadow">
-        <img className="picture-perfil" src={img} alt="" />
-        <div className="main-content-card">
-          <div className="owner-data-card">
+      <motion.article
+        layoutId={id}
+        className="card-info-content shadow"
+        onClick={() => setter(id)}
+      >
+        <motion.img className="picture-perfil" src={img} alt="" />
+        <motion.div className="main-content-card">
+          <motion.div className="owner-data-card">
             <h1 className="title-card">{title}</h1>
-          </div>
-          <p className="descrition-card text">{description}</p>
-        </div>
-      </article>
+          </motion.div>
+          <motion.p className="descrition-card text">{description}</motion.p>
+        </motion.div>
+      </motion.article>
     </>
   );
 }
 
-export default ContentShower;
+export default Content;
