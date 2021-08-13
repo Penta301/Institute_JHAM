@@ -35,6 +35,19 @@ function App() {
       <Suspense fallback={<p>Loading...</p>}>
         <div className="body_login">
           <ProtectedRouter
+            path="/login_super_user"
+            Component={LogicHigherOrderForm}
+            auth={!auth}
+            setAuth={setAuth}
+            PropsComponent={{
+              autoInputs: startSessionBody,
+              setter: setStartSessionBody,
+              actionCB: () => startSession(startSessionBody, "super_user/"),
+            }}
+          />
+        </div>
+        <div className="body_login">
+          <ProtectedRouter
             path="/login"
             Component={LogicHigherOrderForm}
             auth={!auth}

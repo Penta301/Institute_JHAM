@@ -35,6 +35,7 @@ class Course(BaseModel):
     category:str
 
 class Settings(BaseModel):
+   # Despues setear como una variable de entorno
    authjwt_secret_key: str = '7b82e1d300da121b2470deb960b1b802022607de6bf71816123c0d7742fa5f48'
    authjwt_access_token_expires: int = 3600
    authjwt_token_location: set =  {'headers'}

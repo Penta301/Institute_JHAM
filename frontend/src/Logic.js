@@ -61,9 +61,9 @@ function Logic() {
     }
   };
 
-  const startSession = async (body) => {
+  const startSession = async (body, route = "/authentication") => {
     try {
-      const { data } = await api.post("/authentication", body);
+      const { data } = await api.post(route, body);
       localStorage.setItem("token", data.jwt);
       setAuth(true);
     } catch (error) {

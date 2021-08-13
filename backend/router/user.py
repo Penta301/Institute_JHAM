@@ -6,6 +6,7 @@ from hashing import Hash
 from backend.model import User, Show_User, SuperUser
 from backend.database import (
     collection_user, 
+    collection_super_user,
     create_operation,
     fetch_all,
     update_operation,
@@ -31,7 +32,7 @@ async def create_user(user: User):
 async def create_super_user(user:SuperUser, super_password:str):
     if super_password == 'super_user_instituto_JHAM':       
         user = user.dict()
-        response = await create_operation(user, collection_user)
+        response = await create_operation(user, collection_super_user)
         if response:
             return response
     raise HTTPException(404, 'Bad credentials')

@@ -3,6 +3,7 @@ import motor.motor_asyncio
 client = motor.motor_asyncio.AsyncIOMotorClient('mongodb://Juan:Tilacino1@cluster0-shard-00-00.3y2qk.mongodb.net:27017,cluster0-shard-00-01.3y2qk.mongodb.net:27017,cluster0-shard-00-02.3y2qk.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-13tpjz-shard-0&authSource=admin&retryWrites=true&w=majority')
 database = client.Institu_JHAM
 collection_user = database.user
+collection_super_user = database.super_user
 collection_course = database.course
 
 async def fetch_all(collection, model, where, specific):
@@ -50,6 +51,6 @@ async def remove_operation(collection, name):
    result = await collection.delete_one({"name":name})
    return result.deleted_count
 
-async def authenticate_operation(collection, email):
-    verification_name = await collection.find_one({"email":email,})
+async def authenticate_operation(collection, specific, where):
+    verification_name = await collection.find_one({where:specific})
     return verification_name
