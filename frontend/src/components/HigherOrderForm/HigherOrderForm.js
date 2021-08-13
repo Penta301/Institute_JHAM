@@ -12,7 +12,9 @@ function HigherOrderForm({
 
   return (
     <div>
-      <div>{iterateInputs(autoInputs, setter)}</div>
+      <div className="inputs_container">
+        {iterateInputs(autoInputs, setter)}
+      </div>
       {manualInputs}
       <div className="button_container">
         {cancelCB ? (

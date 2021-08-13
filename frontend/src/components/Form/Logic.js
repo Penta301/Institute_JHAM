@@ -1,21 +1,52 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAnimation } from "framer-motion";
 
 function Logic() {
-  const [verificationPass, setVerificationPass] = useState("");
-  // const [showForm, setShowForm] = useState(true);
+  const [showForm, setShowForm] = useState(true);
+  const animation = useAnimation();
 
-  const verificaPass = (password) => {
-    if (password === verificationPass) {
-      return true;
+  useEffect(() => {
+    if (!showForm) {
+      if (window.innerWidth >= 1100) {
+        animation.start({
+          width: "90%",
+          height: 200,
+          transition: {
+            type: "spring",
+            duration: 1,
+            bounce: 0.3,
+          },
+        });
+        return;
+      }
+      console.log("test");
+      animation.start({
+        width: "95%",
+        height: "100%",
+        transition: {
+          type: "spring",
+          duration: 1,
+          bounce: 0.3,
+        },
+      });
+    } else if (showForm) {
+      animation.start({
+        width: "auto",
+        height: "auto",
+        transition: {
+          type: "spring",
+          duration: 1,
+          bounce: 0.3,
+        },
+      });
     }
-    alert("The password are different, insert the same");
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showForm]);
 
   return {
-    // showForm,
-    setVerificationPass,
-    verificationPass,
-    verificaPass,
+    showForm,
+    animation,
+    setShowForm,
   };
 }
 

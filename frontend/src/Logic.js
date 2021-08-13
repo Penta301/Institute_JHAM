@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function Logic() {
-  const [auth, setAuth] = useState(undefined);
+  const [auth, setAuth] = useState(false);
   const [bodyUser, setBodyUser] = useState({
     name: "",
     password: "",
@@ -14,7 +14,14 @@ function Logic() {
     email: "",
     password: "",
   });
+
   const [coursesData, setCoursesData] = useState([]);
+  const [user, setUser] = useState({
+    name: "",
+    age: 0,
+    interest: "",
+    courses: [],
+  });
 
   axios.defaults.headers.common[
     "Authorization"
@@ -36,10 +43,17 @@ function Logic() {
     verifySession();
   }, []);
 
-  const createSesion = async (body) => {
+  const createSesion = async (body, setter) => {
     try {
-      api.post("/create_user/", body);
+      await api.post("/create_user/", body);
       let startSessionBody = { password: body.password, email: body.email };
+      setter({
+        name: "",
+        password: "",
+        age: "",
+        interest: "",
+        email: "",
+      });
       startSession(startSessionBody);
     } catch (error) {
       new Error(error);
@@ -51,7 +65,6 @@ function Logic() {
     try {
       const { data } = await api.post("/authentication", body);
       localStorage.setItem("token", data.jwt);
-      console.log(data);
       setAuth(true);
     } catch (error) {
       new Error(error);
@@ -74,6 +87,15 @@ function Logic() {
     }
   };
 
+  const getUser = async (setter) => {
+    try {
+      const { data } = await api.get("get_user/");
+      setter(data[0]);
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
   return {
     auth,
     setAuth,
@@ -86,6 +108,9 @@ function Logic() {
     setStartSessionBody,
     getAllCourses,
     coursesData,
+    user,
+    setUser,
+    getUser,
   };
 }
 

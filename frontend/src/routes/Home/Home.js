@@ -1,18 +1,11 @@
 import React from "react";
 import "./index.css";
 import Navbar from "../../components/Navbar/Navbar";
+import Form from "../../components/Form/Form";
 import Logic from "./Logic";
 import { motion } from "framer-motion";
 
-function Home({
-  auth,
-  setAuth,
-  bodyUser,
-  setBodyUser,
-  startSession,
-  createSesion,
-  closeSession,
-}) {
+function Home({ auth, bodyUser, setBodyUser, createSesion, closeSession }) {
   const { contentHero, ref, animation } = Logic();
   return (
     <>
@@ -58,6 +51,13 @@ function Home({
             />
           </motion.article>
         </section>
+        <footer className="footer">
+          <Form
+            bodyUser={bodyUser}
+            setBodyUser={setBodyUser}
+            createSesion={createSesion}
+          ></Form>
+        </footer>
       </div>
     </>
   );

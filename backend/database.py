@@ -17,27 +17,32 @@ async def fetch_all(collection, model, where, specific):
         operations.append(model(**document))
     return operations
 
-async def create_operation(model, collection, verify = False):
+async def create_operation(model, collection, where, specific,  verify = False):
     document = model
 
 # Check if the user exits 
 
     try:    
         if verify:
-            
-            user = await collection.find_one({"name":document["name"]})
+            print('Verificando')
+            user = await collection.find_one({where:document[specific]})
             if user:
                 return "error_name"
 
     except AssertionError as error:
         print(error)
 
-    result = await collection.insert_one(document)
+    await collection.insert_one(document)
     return document
 
-async def update_operation(collection, name, model):
+async def update_operation(collection, name, where, model,specific_where ,one = False):
     document = model
-    result = await collection.update_one({"name":name},
+
+    if one:
+        result = await collection.update_one({where:name}, {"$set":{specific_where:model}})
+        return result.matched_count
+    
+    result = await collection.update_one({where:name},
     {"$set":document}) 
     return result.matched_count
 

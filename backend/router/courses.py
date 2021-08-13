@@ -19,8 +19,10 @@ router = APIRouter(
 async def create_course(course: Course):
     course = course.dict()
 
-    response = await create_operation(course, collection_course, verify=True)    
+    response = await create_operation(course, collection_course, where='title', specific='title' ,verify=True)    
     if response:
+        if response == 'error_name':
+            raise HTTPException(409, 'That item exists')
         return response
     raise HTTPException(400, 'Something wet wrong')
 

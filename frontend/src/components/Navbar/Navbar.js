@@ -30,7 +30,7 @@ function Navbar({ auth, closeSession }) {
           </motion.li>
           <motion.li className="link_navbar" variants={item}>
             {auth ? (
-              <Link onClick={() => closeSession()}>Logout</Link>
+              <Link to="/profile">Profile</Link>
             ) : (
               <Link to="/login">Login</Link>
             )}

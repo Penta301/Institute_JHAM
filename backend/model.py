@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Optional
 
 class Token(BaseModel):
     email:str
@@ -10,16 +11,25 @@ class User(BaseModel):
     name:str
     age:str
     interest:str
+    courses:Optional[list] = []
+
+class SuperUser(BaseModel):
+    password:str
+    name:str
+    super:Optional[bool] = True
 
 class Show_User(BaseModel):
     name:str
     age:str
+    interest:str
+    courses:Optional[list] = []
 
 class Course(BaseModel):
     type_course:str
     title:str
     contentSchool:str
     contentUniversity:str
+    generalDescription:str
     owner:str
     img:str
     category:str
