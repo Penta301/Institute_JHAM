@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Logic from "./Logic";
 import { motion } from "framer-motion";
 
-function Navbar({ auth, closeSession }) {
+function Navbar({ auth, closeSession, authSuper }) {
   const { container, item, itemTitle } = Logic();
 
   return (
@@ -17,20 +17,22 @@ function Navbar({ auth, closeSession }) {
       >
         <ul className="list_father">
           <motion.li className="link_navbar" variants={item}>
-            <Link to="/content">Cursos</Link>
+            <Link to="/courses">Cursos</Link>
           </motion.li>
           <motion.li className="link_navbar" variants={item}>
-            <a href="#test">Materias</a>
+            <Link to="/subjects">Materias</Link>
           </motion.li>
           <motion.li className="link_navbar" variants={itemTitle}>
             <h1 className="title_header">Instituto JHAM</h1>
           </motion.li>
           <motion.li className="link_navbar" variants={item}>
-            <a href="#test">Ingresos</a>
+            <Link to="/income">Ingresos</Link>
           </motion.li>
           <motion.li className="link_navbar" variants={item}>
             {auth ? (
               <Link to="/profile">Profile</Link>
+            ) : authSuper ? (
+              <Link to="/admin_panel">Admin Panel</Link>
             ) : (
               <Link to="/login">Login</Link>
             )}

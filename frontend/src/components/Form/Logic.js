@@ -19,7 +19,6 @@ function Logic() {
         });
         return;
       }
-      console.log("test");
       animation.start({
         width: "95%",
         height: "100%",

@@ -14,9 +14,7 @@ function LogicContent({ getAllCourses, typeCourse, coursesData }) {
 
   const setter = (value) => {
     if (contentId) {
-      console.log(contentId);
       setContentId(false);
-      console.log(contentId);
       return;
     }
     setContentId(value);
@@ -30,26 +28,27 @@ function LogicContent({ getAllCourses, typeCourse, coursesData }) {
           {contentId && (
             <motion.div layoutId={contentId} className="test_window_father">
               <div className="test_window shadow">
-                <h4
-                  className="close_button"
-                  onClick={() => setContentId(false)}
-                >
-                  X
-                </h4>
                 <div>
                   {coursesData
                     .filter((e) => e.title === contentId)
                     .map((item, index) => {
-                      const { title, contentSchool, contentUniversity, owner } =
-                        item;
+                      const {
+                        title,
+                        content_school,
+                        content_university,
+                        owner,
+                        general_description,
+                      } = item;
                       let id = owner + index;
                       return (
                         <FullContent
                           key={id}
                           Title={title}
-                          DescriptionSchool={contentSchool}
-                          DescriptionUniversity={contentUniversity}
+                          GeneralDescrition={general_description}
+                          DescriptionSchool={content_school}
+                          DescriptionUniversity={content_university}
                           Owner={owner}
+                          CloseContent={() => setContentId(undefined)}
                         />
                       );
                     })}
@@ -59,12 +58,12 @@ function LogicContent({ getAllCourses, typeCourse, coursesData }) {
           )}
         </AnimatePresence>
         {coursesData.map((item) => {
-          const { content, img, title } = item;
+          const { general_description, img, title } = item;
           return (
             <Content
               key={title}
               img={img}
-              description={content}
+              description={general_description}
               title={title}
               id={title}
               setter={setter}

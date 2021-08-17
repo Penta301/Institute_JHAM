@@ -3,6 +3,7 @@ import axios from "axios";
 
 function Logic() {
   const [auth, setAuth] = useState(false);
+  const [authSuper, setAuthSuper] = useState(false);
   const [bodyUser, setBodyUser] = useState({
     name: "",
     password: "",
@@ -10,6 +11,14 @@ function Logic() {
     interest: "",
     email: "",
   });
+
+  const [superBodyUser, setSuperBodyUser] = useState({
+    email: "",
+    name: "",
+    password: "",
+    superPassword: "",
+  });
+
   const [startSessionBody, setStartSessionBody] = useState({
     email: "",
     password: "",
@@ -22,6 +31,17 @@ function Logic() {
     interest: "",
     courses: [],
   });
+  const [course, setCourse] = useState({
+    type_course: "Materia",
+    title: "",
+    content_school: "",
+    content_university: "",
+    general_description: "",
+    owner: "",
+    img: "",
+    category: "",
+    price: "",
+  });
 
   axios.defaults.headers.common[
     "Authorization"
@@ -33,20 +53,29 @@ function Logic() {
 
   const verifySession = () => {
     if (localStorage.getItem("token")) {
+      if (localStorage.getItem("super_token")) {
+        setAuthSuper(true);
+        return;
+      }
       setAuth(true);
       return;
     }
     setAuth(undefined);
+    setAuthSuper(undefined);
   };
 
   useEffect(() => {
     verifySession();
   }, []);
 
-  const createSesion = async (body, setter) => {
+  const createSesion = async (
+    body,
+    setter,
+    route = "/create_user/",
+    startSessionEval = true
+  ) => {
     try {
-      await api.post("/create_user/", body);
-      let startSessionBody = { password: body.password, email: body.email };
+      await api.post(route, body);
       setter({
         name: "",
         password: "",
@@ -54,10 +83,11 @@ function Logic() {
         interest: "",
         email: "",
       });
-      startSession(startSessionBody);
+      if (startSessionEval) {
+        startSession({ ...startSessionBody });
+      }
     } catch (error) {
-      new Error(error);
-      throw Error;
+      throw new Error(error);
     }
   };
 
@@ -65,16 +95,39 @@ function Logic() {
     try {
       const { data } = await api.post(route, body);
       localStorage.setItem("token", data.jwt);
+      if (data.auth) {
+        setAuthSuper(true);
+        localStorage.setItem("super_token", data.auth);
+        return;
+      }
       setAuth(true);
     } catch (error) {
-      new Error(error);
-      throw Error;
+      throw new Error(error);
     }
   };
 
   const closeSession = () => {
-    localStorage.removeItem("token");
+    localStorage.clear();
     verifySession();
+  };
+
+  const createCourses = async (body, setter) => {
+    try {
+      api.post("/create_course/", body);
+      setter({
+        type_course: "Materia",
+        title: "",
+        content_school: "",
+        content_university: "",
+        general_description: "",
+        owner: "",
+        img: "",
+        category: "",
+        price: "",
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
   };
 
   const getAllCourses = async (typeCourse) => {
@@ -82,8 +135,7 @@ function Logic() {
       const { data } = await api.get(`get_all_courses/${typeCourse}`);
       setCoursesData(data);
     } catch (error) {
-      new Error(error);
-      throw Error;
+      throw new Error(error);
     }
   };
 
@@ -99,8 +151,12 @@ function Logic() {
   return {
     auth,
     setAuth,
+    authSuper,
+    setAuthSuper,
     bodyUser,
     setBodyUser,
+    superBodyUser,
+    setSuperBodyUser,
     startSession,
     createSesion,
     closeSession,
@@ -111,6 +167,9 @@ function Logic() {
     user,
     setUser,
     getUser,
+    course,
+    setCourse,
+    createCourses,
   };
 }
 

@@ -5,14 +5,25 @@ import Form from "../../components/Form/Form";
 import Logic from "./Logic";
 import { motion } from "framer-motion";
 
-function Home({ auth, bodyUser, setBodyUser, createSesion, closeSession }) {
+function Home({
+  auth,
+  bodyUser,
+  setBodyUser,
+  createSesion,
+  closeSession,
+  authSuper,
+}) {
   const { contentHero, ref, animation } = Logic();
   return (
     <>
       <div className="main_father_content">
         <main className="main_content">
           <header>
-            <Navbar closeSession={closeSession} auth={auth}></Navbar>
+            <Navbar
+              closeSession={closeSession}
+              auth={auth}
+              authSuper={authSuper}
+            ></Navbar>
           </header>
           <motion.article
             className="article"
@@ -36,7 +47,6 @@ function Home({ auth, bodyUser, setBodyUser, createSesion, closeSession }) {
         <section className="second_section" ref={ref}>
           <motion.article className="article" animate={animation}>
             <div className="item shadow">
-              <h2 className="logo_title">LOGO</h2>
               <p className="text">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
                 consequuntur adipisci delectus repudiandae dignissimos corporis

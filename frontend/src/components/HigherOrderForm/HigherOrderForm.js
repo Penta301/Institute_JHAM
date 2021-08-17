@@ -19,21 +19,21 @@ function HigherOrderForm({
       <div className="button_container">
         {cancelCB ? (
           <button
-            className="button_form_cancel shadow text"
+            className="button_cancel shadow text"
             onClick={() => cancelCB()}
           >
             Cancel
           </button>
         ) : (
           <button
-            className="button_form_cancel shadow text"
+            className="button_cancel shadow text"
             onClick={() => history.push("/")}
           >
             Cancel
           </button>
         )}
         <button
-          className="button_form_send shadow text"
+          className="button_send shadow text"
           onClick={() => {
             actionCB();
             history.push("/");

@@ -1,0 +1,130 @@
+.title_nav_admin_panel {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 50px;
+  justify-content: space-around;
+  margin-block: 10px;
+  align-items: center;
+}
+
+.header_content_admin_panel {
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.upload_picture_admin_panel {
+  width: 200px;
+  height: 200px;
+  background-color: var(--secondary-content-color);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  color: white;
+}
+
+.text_input_admin_panel {
+  width: 80%;
+}
+
+.main_content_admin_panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.footer_content_admin_panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.button_nav_admin_panel {
+  width: 50px;
+}
+
+.main_inputs_text_header_admin_panel {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  gap: 10px;
+}
+
+.image_container_admin_panel {
+  width: 200px;
+  display: flex;
+  overflow: hidden;
+  height: 200px;
+  border-radius: 20px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}
+
+.button_container_admin_panel {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.button_send_admin_panel {
+  width: 90%;
+}
+
+@media screen and (min-width: 1200px) {
+  .header_content_admin_panel {
+    padding: 10px;
+    display: flex;
+    justify-content: auto;
+    align-items: center;
+  }
+
+  .text_input_admin_panel {
+    width: 100%;
+  }
+
+  .main_content_admin_panel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .text_area_admin_panel {
+    width: 40%;
+    height: 350px;
+    margin-bottom: 50px;
+  }
+
+  .footer_content_admin_panel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 50px;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .button_nav_admin_panel {
+    width: 50px;
+  }
+
+  .button_container_admin_panel {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .button_send_admin_panel {
+    width: 10%;
+    margin-right: 20px;
+  }
+}

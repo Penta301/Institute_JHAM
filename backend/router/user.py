@@ -32,9 +32,10 @@ async def create_user(user: User):
 async def create_super_user(user:SuperUser, super_password:str):
     if super_password == 'super_user_instituto_JHAM':       
         user = user.dict()
+        user["password"] = Hash.encrypt(user["password"])
         response = await create_operation(user, collection_super_user)
         if response:
-            return response
+            return {'name': user['name']}
     raise HTTPException(404, 'Bad credentials')
     
 @router.get('/get_user/')
@@ -49,10 +50,8 @@ async def get_user(Authorize: AuthJWT = Depends()):
 @router.put('/add_course/')
 async def add_course(courses:list, Authorize: AuthJWT = Depends()):
     Authorize.jwt_required()
-    courses 
     current_user = Authorize.get_jwt_subject()
     response = await update_operation(collection_user, current_user, 'email', courses, 'courses', True)
     if response:
         return response
-    raise HTTPException(400, 'Something went wron')
-    
+    raise HTTPException(400, 'Something went wrong')

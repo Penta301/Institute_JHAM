@@ -5,15 +5,20 @@
 
 .inner-full-content {
   display: flex;
+  width: 100%;
 }
 
 .content-card {
   text-align: center;
+  padding: 20px;
 }
 
 .main-full-content {
   margin-bottom: 20px;
   padding: 10px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .title-full-content {
@@ -21,4 +26,28 @@
   margin-left: 20px;
   margin-bottom: 20px;
   border-bottom: 1px solid #ddd;
+}
+
+.close_content_icon {
+  cursor: pointer;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+}
+
+.description_showed_content {
+  margin-bottom: 20px;
+  font-size: 30px;
+  text-decoration: underline;
+  color: #fff;
+}
+
+.owner_showed_content {
+  color: #fff;
+  font-size: 30px;
+  align-self: flex-end;
+  letter-spacing: 1.3px;
+  text-decoration: underline;
+  margin-right: 20px;
 }

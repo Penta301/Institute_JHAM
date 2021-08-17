@@ -16,7 +16,8 @@ router = APIRouter(
 )
 
 @router.post("/create_course/", response_model = Course)
-async def create_course(course: Course):
+async def create_course(course: Course, Authorize: AuthJWT = Depends()):
+    Authorize.jwt_required()
     course = course.dict()
 
     response = await create_operation(course, collection_course, where='title', specific='title' ,verify=True)    

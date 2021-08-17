@@ -1,8 +1,10 @@
-import React from "react";
+import CloudinaryWidget from "../../helpers/Cloudinary/Cloudinary";
 import "./index.css";
 import { motion } from "framer-motion";
 
 function Content({ img, description, title, setter, id }) {
+  const { createImage } = CloudinaryWidget();
+
   return (
     <>
       <motion.article
@@ -10,7 +12,7 @@ function Content({ img, description, title, setter, id }) {
         className="card-info-content shadow"
         onClick={() => setter(id)}
       >
-        <motion.img className="picture-perfil" src={img} alt="" />
+        {createImage(img)}
         <motion.div className="main-content-card">
           <motion.div className="owner-data-card">
             <h1 className="title-card">{title}</h1>

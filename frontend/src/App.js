@@ -5,6 +5,7 @@ import "./FormLogin.css";
 import Logic from "./Logic";
 import ProtectedRouter from "./helpers/ProtectedRouter/ProtectedRouter";
 
+const AdminPanel = lazy(() => import("./routes/AdminPanel/AdminPanel"));
 const Home = lazy(() => import("./routes/Home/Home"));
 const LogicProfile = lazy(() => import("./routes/Profile/LogicProfile"));
 const LogicHigherOrderForm = lazy(() =>
@@ -16,7 +17,11 @@ function App() {
   const {
     auth,
     setAuth,
+    authSuper,
     bodyUser,
+    superBodyUser,
+    setAuthSuper,
+    setSuperBodyUser,
     setBodyUser,
     startSession,
     createSesion,
@@ -28,23 +33,41 @@ function App() {
     user,
     setUser,
     getUser,
+    course,
+    setCourse,
+    createCourses,
   } = Logic();
 
   return (
     <Router>
       <Suspense fallback={<p>Loading...</p>}>
         <div className="body_login">
-          <ProtectedRouter
-            path="/login_super_user"
-            Component={LogicHigherOrderForm}
-            auth={!auth}
-            setAuth={setAuth}
-            PropsComponent={{
-              autoInputs: startSessionBody,
-              setter: setStartSessionBody,
-              actionCB: () => startSession(startSessionBody, "super_user/"),
-            }}
-          />
+          <Route path="/login_super_user">
+            <LogicHigherOrderForm
+              autoInputs={startSessionBody}
+              setter={setStartSessionBody}
+              actionCB={() => {
+                startSession(
+                  { ...startSessionBody, name: startSessionBody.email },
+                  "authentication/super_user/"
+                );
+              }}
+            ></LogicHigherOrderForm>
+          </Route>
+          <Route path="/register_super_user">
+            <LogicHigherOrderForm
+              autoInputs={superBodyUser}
+              setter={setSuperBodyUser}
+              actionCB={() =>
+                createSesion(
+                  superBodyUser,
+                  setSuperBodyUser,
+                  `super_user/${superBodyUser.superPassword}`,
+                  false
+                )
+              }
+            ></LogicHigherOrderForm>
+          </Route>
         </div>
         <div className="body_login">
           <ProtectedRouter
@@ -68,25 +91,45 @@ function App() {
               setBodyUser={setBodyUser}
               createSesion={createSesion}
               closeSession={closeSession}
+              authSuper={authSuper}
             ></Home>
           </div>
         </Route>
-        <Route path="/content">
+        <Route path="/courses">
+          <LogicContent
+            getAllCourses={getAllCourses}
+            coursesData={coursesData}
+            typeCourse="Curso"
+          />
+        </Route>
+        <Route path="/subjects">
           <LogicContent
             getAllCourses={getAllCourses}
             coursesData={coursesData}
             typeCourse="Materia"
           />
         </Route>
-        <Route path="/profile">
-          <ProtectedRouter
-            path="/profile"
-            Component={LogicProfile}
-            auth={auth}
-            setAuth={setAuth}
-            PropsComponent={{ user, setUser, getUser, closeSession }}
+        <Route path="/income">
+          <LogicContent
+            getAllCourses={getAllCourses}
+            coursesData={coursesData}
+            typeCourse="Ingreso"
           />
         </Route>
+        <ProtectedRouter
+          path="/profile"
+          Component={LogicProfile}
+          auth={auth}
+          setAuth={setAuth}
+          PropsComponent={{ user, setUser, getUser, closeSession }}
+        />
+        <ProtectedRouter
+          path="/admin_panel"
+          Component={AdminPanel}
+          auth={authSuper}
+          setAuth={setAuthSuper}
+          PropsComponent={{ closeSession, course, setCourse, createCourses }}
+        />
       </Suspense>
     </Router>
   );

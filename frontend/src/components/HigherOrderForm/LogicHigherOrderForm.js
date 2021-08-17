@@ -11,7 +11,7 @@ function LogicHigherOrderForm({
     return Object.entries(object).map((item, index) => {
       const construcction = (
         <input
-          className="text_input_form shadow text"
+          className="text_input shadow text"
           key={index}
           type="text"
           placeholder={[item[0]]}

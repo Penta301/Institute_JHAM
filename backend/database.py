@@ -1,4 +1,6 @@
 import motor.motor_asyncio 
+from mercadopago_config import create_mercadopago_items
+import random
 
 client = motor.motor_asyncio.AsyncIOMotorClient('mongodb://Juan:Tilacino1@cluster0-shard-00-00.3y2qk.mongodb.net:27017,cluster0-shard-00-01.3y2qk.mongodb.net:27017,cluster0-shard-00-02.3y2qk.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-13tpjz-shard-0&authSource=admin&retryWrites=true&w=majority')
 database = client.Institu_JHAM
@@ -18,17 +20,17 @@ async def fetch_all(collection, model, where, specific):
         operations.append(model(**document))
     return operations
 
-async def create_operation(model, collection, where, specific,  verify = False):
+async def create_operation(model, collection, where = '', specific = '',  verify = False):
     document = model
 
 # Check if the user exits 
 
     try:    
         if verify:
-            print('Verificando')
-            user = await collection.find_one({where:document[specific]})
-            if user:
-                return "error_name"
+            repeat = await collection.find_one({where:document[specific]})
+            if repeat:
+                random_number = random.randint(0, 22)
+                document[where] = document[where] + f'_{random_number}'
 
     except AssertionError as error:
         print(error)
@@ -54,3 +56,14 @@ async def remove_operation(collection, name):
 async def authenticate_operation(collection, specific, where):
     verification_name = await collection.find_one({where:specific})
     return verification_name
+
+async def pay_service_mercadopago(model_pay, model_user):
+    document = model_pay
+    
+    user_response = update_operation(collection_user, model_user['email'], model_user, 'email') 
+
+    mercado_pago_response = create_mercadopago_items([document])
+
+    response = {'mercado_pago_response':mercado_pago_response,
+                'user_response':user_response,}
+    return response

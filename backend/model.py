@@ -16,7 +16,8 @@ class User(BaseModel):
 class SuperUser(BaseModel):
     password:str
     name:str
-    super:Optional[bool] = True
+    email:str
+    superCondition:Optional[bool] = True
 
 class Show_User(BaseModel):
     name:str
@@ -27,12 +28,13 @@ class Show_User(BaseModel):
 class Course(BaseModel):
     type_course:str
     title:str
-    contentSchool:str
-    contentUniversity:str
-    generalDescription:str
+    content_school:str
+    content_university:str
+    general_description:str
     owner:str
     img:str
     category:str
+    price:int
 
 class Settings(BaseModel):
    # Despues setear como una variable de entorno
