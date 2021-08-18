@@ -62,11 +62,15 @@ function Home({
           </motion.article>
         </section>
         <footer className="footer">
-          <Form
-            bodyUser={bodyUser}
-            setBodyUser={setBodyUser}
-            createSesion={createSesion}
-          ></Form>
+          {auth || authSuper ? (
+            ""
+          ) : (
+            <Form
+              bodyUser={bodyUser}
+              setBodyUser={setBodyUser}
+              createSesion={createSesion}
+            ></Form>
+          )}
         </footer>
       </div>
     </>

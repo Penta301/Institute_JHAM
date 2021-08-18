@@ -47,11 +47,14 @@ async def get_user(Authorize: AuthJWT = Depends()):
        return response
    raise HTTPException(400, "Something went wrong")
 
-@router.put('/add_course/')
-async def add_course(courses:list, Authorize: AuthJWT = Depends()):
+@router.put('/add_course/{course}')
+async def add_course(course:str, Authorize: AuthJWT = Depends()):
     Authorize.jwt_required()
     current_user = Authorize.get_jwt_subject()
-    response = await update_operation(collection_user, current_user, 'email', courses, 'courses', True)
+    user = await get_user(Authorize)
+    courses = user[0].dict().get('courses')
+    courses.append(course)
+    response = await update_operation(collection_user, 'email',current_user, courses, 'courses', True)
     if response:
         return response
     raise HTTPException(400, 'Something went wrong')

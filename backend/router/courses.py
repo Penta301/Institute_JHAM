@@ -5,9 +5,7 @@ from fastapi_jwt_auth import AuthJWT
 from backend.model import Course, Show_User
 from backend.database import (
     collection_course,
-    collection_user,
     remove_operation,
-    update_operation,
     create_operation,
     pay_service_mercadopago,
     fetch_all
@@ -28,10 +26,8 @@ async def create_course(course: Course, Authorize: AuthJWT = Depends()):
             "quantity": 1,
             "unit_price": course.get('price'),}
             
-
     create_payment = await pay_service_mercadopago(formated_body)
     create_payment = create_payment['mercado_pago_response']['id']
-
 
     if not create_payment:
         raise HTTPException(400, "Something went wrong")
@@ -42,33 +38,6 @@ async def create_course(course: Course, Authorize: AuthJWT = Depends()):
     if response:
         if response == 'error_name':
             raise HTTPException(409, 'That item exists')
-        return response
-    raise HTTPException(400, 'Something wet wrong')
-
-@router.post("/pay_course/{title}/{price}")
-async def pay_course(title:str, price:int,Authorize: AuthJWT = Depends()):
-    Authorize.jwt_required()
-    current_user = Authorize.get_jwt_subject()
-
-    response_user = await fetch_all(collection_user, Show_User, 'email', current_user)
-    response_user = response_user[0].dict()
-    courses = response_user.get('courses')
-
-
-    if not response_user:
-        raise HTTPException(404, 'That user does not exist')
-
-    formated_body = {            
-            "title": title,
-            "quantity": 1,
-            "unit_price": price,
-            }
-   
-    response = await pay_service_mercadopago(formated_body, response_user) 
-    
-    if response:
-        courses.append(title)
-        await update_operation(collection_user, "name", current_user, courses, 'courses', True)
         return response
     raise HTTPException(400, 'Something wet wrong')
 

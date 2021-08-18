@@ -1,5 +1,5 @@
 import "./index.css";
-import LogicPayment from "../../helpers/Payment/Logic2";
+import LogicPayment from "../../helpers/Payment/LogicPayment";
 import { IconContext } from "react-icons";
 import { GrClose } from "react-icons/gr";
 
@@ -33,7 +33,7 @@ function FullContent({
             <p>{DescriptionUniversity}</p>
           </div>
         </div>
-        <LogicPayment response_id={response_id}></LogicPayment>
+        <LogicPayment response_id={response_id} title={Title}></LogicPayment>
         <h4 className="owner_showed_content">Teacher: {Owner}</h4>
         <h4 className="owner_showed_content">Price: {Price}</h4>
       </article>

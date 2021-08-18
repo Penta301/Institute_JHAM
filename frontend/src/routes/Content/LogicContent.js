@@ -32,7 +32,6 @@ function LogicContent({ getAllCourses, typeCourse, coursesData }) {
                   {coursesData
                     .filter((e) => e.title === contentId)
                     .map((item, index) => {
-                      console.log(item);
                       const {
                         title,
                         content_school,

@@ -1,58 +1,45 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 
-function LogicPayment({ baseUrl, title, price }) {
-  const [getState, setGetState] = useState(false);
-  const [preference, setPreference] = useState(false);
-
+function LogicPayment({ response_id, title }) {
   const api = axios.create({
-    baseURL: baseUrl,
+    baseURL: "http://127.0.0.1:8000/api",
   });
 
-  const payCourse = async (setter, title, price) => {
+  const addCourse = async (title) => {
     try {
-      const { data } = await api.post(`pay_course/${title}/${price}`);
-      setter(data.mercado_pago_response);
+      await api.put(`/add_course/${title}`);
     } catch (error) {
       throw new Error(error);
     }
   };
 
   useEffect(() => {
-    if (getState === true) {
-      payCourse(setPreference, title, price);
-    }
+    window.Mercadopago.setPublishableKey(
+      "TEST-f32b57db-5d48-445d-b9f0-84b8609f20d9"
+    );
+    createCheckoutButton(response_id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getState]);
+  }, [response_id]);
 
-  useEffect(() => {
-    if (preference !== false) {
-      console.log(preference);
-      window.Mercadopago.setPublishableKey(
-        "TEST-f32b57db-5d48-445d-b9f0-84b8609f20d9"
-      );
-      createCheckoutButton(preference.id);
-    }
-  }, [preference]);
-
-  function createCheckoutButton(preference) {
+  function createCheckoutButton(response) {
     let script = document.createElement("script");
 
     script.src =
       "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
     script.type = "text/javascript";
-    script.dataset.preferenceId = preference;
+    script.dataset.preferenceId = response;
     document.getElementById("button-checkout").innerHTML = "";
     document.querySelector("#button-checkout").appendChild(script);
   }
 
   return (
     <>
-      {preference ? (
-        <div className="button-checkout" id="button-checkout"></div>
-      ) : (
-        <button onClick={() => setGetState(true)}>Pagar</button>
-      )}
+      <div
+        className="button-checkout"
+        id="button-checkout"
+        onClick={() => addCourse(title)}
+      ></div>
     </>
   );
 }
