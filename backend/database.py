@@ -1,5 +1,5 @@
 import motor.motor_asyncio 
-from mercadopago_config import create_mercadopago_items
+from mercado_pago import create_mercadopago_items
 import random
 
 client = motor.motor_asyncio.AsyncIOMotorClient('mongodb://Juan:Tilacino1@cluster0-shard-00-00.3y2qk.mongodb.net:27017,cluster0-shard-00-01.3y2qk.mongodb.net:27017,cluster0-shard-00-02.3y2qk.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-13tpjz-shard-0&authSource=admin&retryWrites=true&w=majority')
@@ -38,7 +38,7 @@ async def create_operation(model, collection, where = '', specific = '',  verify
     await collection.insert_one(document)
     return document
 
-async def update_operation(collection, name, where, model,specific_where ,one = False):
+async def update_operation(collection, where, name, model,specific_where ,one = False):
     document = model
 
     if one:
@@ -57,13 +57,12 @@ async def authenticate_operation(collection, specific, where):
     verification_name = await collection.find_one({where:specific})
     return verification_name
 
-async def pay_service_mercadopago(model_pay, model_user):
+async def pay_service_mercadopago(model_pay):
     document = model_pay
-    
-    user_response = update_operation(collection_user, model_user['email'], model_user, 'email') 
-
     mercado_pago_response = create_mercadopago_items([document])
 
-    response = {'mercado_pago_response':mercado_pago_response,
-                'user_response':user_response,}
+    response = {
+        'mercado_pago_response':mercado_pago_response,
+                }
+
     return response

@@ -32,12 +32,15 @@ function LogicContent({ getAllCourses, typeCourse, coursesData }) {
                   {coursesData
                     .filter((e) => e.title === contentId)
                     .map((item, index) => {
+                      console.log(item);
                       const {
                         title,
                         content_school,
                         content_university,
                         owner,
                         general_description,
+                        price,
+                        response_id,
                       } = item;
                       let id = owner + index;
                       return (
@@ -49,6 +52,8 @@ function LogicContent({ getAllCourses, typeCourse, coursesData }) {
                           DescriptionUniversity={content_university}
                           Owner={owner}
                           CloseContent={() => setContentId(undefined)}
+                          Price={price}
+                          response_id={response_id}
                         />
                       );
                     })}

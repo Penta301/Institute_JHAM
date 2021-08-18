@@ -35,6 +35,7 @@ class Course(BaseModel):
     img:str
     category:str
     price:int
+    response_id:Optional[str] = '' 
 
 class Settings(BaseModel):
    # Despues setear como una variable de entorno

@@ -9,7 +9,7 @@ from backend.model import Token, Settings
 
 router = APIRouter(
     prefix="/api/authentication",
-    tags=['authentication']
+    tags=['Authentication']
 )
 
 @AuthJWT.load_config
